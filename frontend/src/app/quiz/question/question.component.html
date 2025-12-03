@@ -1,0 +1,15 @@
+<div>
+  @if (quizService.getCurrentQuestion(); as currentQuestion) {
+    <div class="question">{{ currentQuestion.question }}</div>
+    <div class="answers">
+      @for(currentQuestionAnswer of quizService.currentQuestionAnswers(); track $index) {
+        <quiz-answer 
+          [answerText]="currentQuestionAnswer" 
+          [answerIndex]="$index" 
+        />
+      }
+    </div>
+  } @else {
+    <div class="loading">Loading questions...</div>
+  }
+</div>

@@ -1,0 +1,42 @@
+<div class="bg-wrapper"></div>
+<div class="backToMenu-section">
+    <button (click)="goToWelcome()" class="back-button">Back to Menu</button>
+</div>
+<section>
+  <div class="leaderboard-container">
+    <h2>Leaderboard</h2>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Computer Science</th>
+            <th>Maths</th>
+            <th>General Knowledge</th>
+            <th>Sports</th>
+            <th>Total Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of users; track user._id; let i = $index) {
+            <tr>
+              <td class="rank">{{i + 1}}</td>
+              <td>{{user.username}}</td>
+              <td>{{user.scores[0]}}</td>
+              <td>{{user.scores[1]}}</td>
+              <td>{{user.scores[2]}}</td>
+              <td>{{user.scores[3]}}</td>
+              <td class="total-score">{{calculateTotalScore(user.scores)}}</td>
+            </tr>
+          }
+          @empty {
+            <tr>
+              <td colspan="7" class="text-center py-4">No users found</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

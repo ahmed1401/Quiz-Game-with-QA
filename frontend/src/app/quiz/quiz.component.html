@@ -1,0 +1,32 @@
+<section>
+  <div class="quiz">
+    @if(quizService.isLoading()) {
+      <div class="loading">Loading quiz...</div>
+    } @else if(quizService.showResult()) {
+      <div class="results">
+        <div class="congratulations">Congratulations</div>
+        <div class="result-info">
+          <div>You have completed this quiz</div>
+          <div>
+            You've got {{ quizService.correctAnswerCount() }} out of
+            {{ quizService.questions().length }} right.
+          </div>
+        </div>
+        <button [routerLink]="['/welcome']" class="next-button">Back to the menu</button>
+      </div>
+    } @else {
+      <div>
+        <div class="score">
+          Question {{ quizService.currentQuestionIndex() + 1 }}/{{
+            quizService.questions().length
+          }}
+        </div>
+        <app-question />
+        @if(quizService.currentAnswer()) {
+          <div class="next-button" (click)="quizService.onNextQuestion()">
+            Next question
+          </div>
+        }
+      </div>
+    }
+  </div>

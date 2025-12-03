@@ -1,0 +1,90 @@
+{
+  "ComputerScience": [
+    {
+      "question": "What does CPU stand for?",
+      "incorrectAnswers": [
+        "Central Process Utility",
+        "Computer Personal Unit",
+        "Control Processing Unit"
+      ],
+      "correctAnswer": "Central Processing Unit",
+      "category": "Computer Science"
+    },
+    {
+      "question": "Which programming language runs natively in the browser?",
+      "incorrectAnswers": [
+        "Python",
+        "C++",
+        "Java"
+      ],
+      "correctAnswer": "JavaScript",
+      "category": "Computer Science"
+    }
+  ],
+  "Maths": [
+    {
+      "question": "What is the derivative of x^2?",
+      "incorrectAnswers": [
+        "2x^2",
+        "x",
+        "x^3"
+      ],
+      "correctAnswer": "2x",
+      "category": "Maths"
+    },
+    {
+      "question": "What is the value of π rounded to two decimals?",
+      "incorrectAnswers": [
+        "3.10",
+        "3.50",
+        "2.14"
+      ],
+      "correctAnswer": "3.14",
+      "category": "Maths"
+    }
+  ],
+  "GeneralKnowledge": [
+    {
+      "question": "Which continent is the Sahara Desert located in?",
+      "incorrectAnswers": [
+        "Asia",
+        "Australia",
+        "South America"
+      ],
+      "correctAnswer": "Africa",
+      "category": "General Knowledge"
+    },
+    {
+      "question": "Who wrote '1984'?",
+      "incorrectAnswers": [
+        "Aldous Huxley",
+        "J.K. Rowling",
+        "Mark Twain"
+      ],
+      "correctAnswer": "George Orwell",
+      "category": "General Knowledge"
+    }
+  ],
+  "Sports": [
+    {
+      "question": "How many players are on a soccer team on the field?",
+      "incorrectAnswers": [
+        "9",
+        "12",
+        "8"
+      ],
+      "correctAnswer": "11",
+      "category": "Sports"
+    },
+    {
+      "question": "Which country hosts the Wimbledon tournament?",
+      "incorrectAnswers": [
+        "France",
+        "United States",
+        "Spain"
+      ],
+      "correctAnswer": "United Kingdom",
+      "category": "Sports"
+    }
+  ]
+}

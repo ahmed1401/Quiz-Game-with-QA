@@ -1,0 +1,30 @@
+# Rapport Défauts — Export 30/11/2025
+
+> **Document**: Registre des Défauts — Quiz Game 2025  
+> **Référence**: QA-DEF-2025-11  
+> **Version**: 1.4  
+> **Date**: 30/11/2025  
+> **Auteur**: QA Lead (A. Karim)  
+> **Diffusion**: `QA_Bundle/05_Reports` & `QA_Bundle/AHMED/05_Reports`
+
+## Synthèse
+| Statut | Critique | Majeure | Mineure | Total |
+|--------|----------|---------|---------|-------|
+| Ouverts | 1 | 1 | 0 | 2 |
+| Fermés ce cycle | 0 | 1 | 2 | 3 |
+| Cumul depuis début | 1 | 3 | 2 | 6 |
+
+> **Alertes actives** : maintenir un focus sur DEF-002 (intégrité des scores) et DEF-001 (ordre des réponses). Aucun défaut bloquant.
+
+| ID | Titre | Description | Scénario impacté | Sévérité | Statut | Responsable | Commentaires |
+|----|-------|-------------|-------------------|----------|--------|-------------|--------------|
+| DEF-001 | Mélange réponses non aléatoire | Les réponses apparaissent dans le même ordre à chaque partie, ne respectant pas le critère AC1.11. | TC-QUIZ-003 | Majeure | Ouvert | Frontend | Implémenter algorithme Fisher-Yates avant affichage, ajouter test unitaire sur `quiz.service.ts`.
+| DEF-002 | Validation categoryIndex manquante | L'API PATCH `/api/users/score/:userId` accepte des indexes >3 et écrase d'autres scores. | TC-DATA-004 | Critique | Ouvert | Backend | Ajouter garde 0-3 dans `updateUserScore`, retourner 400 sinon, couvrir via SuperTest.
+| DEF-0003 | Message erreur générique sur login | Ancien bug : message «Invalid email or password» tronqué. | TC-AUTH-004 | Mineure | Fermé | Frontend | Résolu le 18/11 — message complet + i18n.
+| DEF-0004 | Loader absent sur Start Quiz | Ancien bug : UX sans feedback pendant chargement questions. | TC-QUIZ-002 | Mineure | Fermé | Frontend | Résolu le 18/11 — ajout spinner + test Cypress.
+| DEF-0005 | Leaderboard tri ascendant | Ancien bug : tri croissant par défaut. | TC-LEAD-002 | Majeure | Fermé | Frontend | Résolu le 18/11 — tri décroissant et tests.
+
+**Résumé**
+- Défauts ouverts : 2 (1 majeure, 1 critique).
+- Défauts fermés durant ce cycle : 3 (tous retestés PASS).
+- Aucun défaut bloquant restant.

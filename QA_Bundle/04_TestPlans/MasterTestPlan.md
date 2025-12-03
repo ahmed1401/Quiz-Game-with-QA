@@ -1,0 +1,193 @@
+**Formulaire: Plan de Test**  
+**Propriétaire:** Équipe QA Quiz Game  
+**Auteur:** Ahmed HAJJEJ & Skander HAKOUNA  
+**Version:** 1.0  
+**Date:** 29 novembre 2025
+
+**Quiz Game Application**  
+**Plan de Test Maître**
+
+**Identification du document**
+
+| Élément | Valeur | Élément | Valeur |
+|---|---|---|---|
+| Nom du document | Master Test Plan — Quiz Game Application | Référence du projet | QUIZ-GAME-SPRINT1 |
+| Référence du document | QG-MTP-001 | Version | 1.0 |
+| Préparé par | Ahmed HAJJEJ & Skander HAKOUNA | Date | 29/11/2025 |
+
+**Historique des changements**
+
+| Version | ID de la demande de changement | Date | Modifié par | Description du changement |
+|---|---|---|---|---|
+| 1.0 | N/A | 29/11/2025 | A. HAJJEJ & S. HAKOUNA | Version initiale |
+
+**Distribution et validation**
+
+La méthode RACI est utilisée pour identifier les rôles des destinataires du document.
+
+- **R** : Réalisation (Responsible) — exécute le travail.
+- **A** : Approbation (Accountable) — approuve et signe.
+- **C** : Consultation (Consulted) — donne son avis.
+- **I** : Information (Informed) — est informé des résultats.
+
+| Nom | Rôle | Entité | RACI | Date de validation |
+|---|---|---|---|---|
+| Ahmed HAJJEJ | QA Lead | Équipe QA | R | [À signer] |
+| Skander HAKOUNA | QA Analyst | Équipe QA | R | [À signer] |
+| PO | Product Owner | Business | A | [À signer] |
+| Tech Lead | Technical Lead | Développement | C | [À signer] |
+| DevOps | DevOps Engineer | Infrastructure | I | [À signer] |
+
+**Responsables QA** : Ahmed Hajjej & Skander Hakouna
+
+# MASTER TEST PLAN — QUIZ GAME APPLICATION
+
+## 1. INTRODUCTION
+
+### 1.1 OBJECTIF
+Ce document décrit l'approche globale de test pour l'application Quiz Game. Il consolide la portée fonctionnelle, les scénarios prioritaires, les ressources nécessaires, ainsi que les procédures de suivi et de clôture afin de garantir que les exigences métier décrites dans `PlanTest.md` sont vérifiées avant la mise en production.
+
+### 1.2 RÉFÉRENCES
+- `PlanTest.md` — Spécification des user stories et critères d'acceptation.
+- `TestScope.md` — Périmètre de test, caractéristiques couvertes et stratégie détaillée.
+- `TestCases.md` — Catalogue textuel des cas de test.
+- `TestCasesSheet.csv` — Export tabulaire prêt à l'import dans Sheets structurées.
+- Référentiel de code: `backend/`, `frontend/` (Angular 18 + Node/Express + MongoDB).
+
+## 2. APERÇU GÉNÉRAL DU PROJET
+L'application permet à un utilisateur de s'inscrire, se connecter, sélectionner un quiz par catégorie, répondre aux questions et suivre ses performances via un leaderboard. Les modules clés sont l'authentification, le moteur de quiz, la gestion des scores et le classement global.
+
+### 2.1 JALONS DU PROJET
+| Jalons | Description | Date cible |
+|--------|-------------|------------|
+| M1 | Finalisation du backend (API utilisateurs & questions) | 05/11/2025 |
+| M2 | Livraison du frontend Angular (quiz + leaderboard) | 10/11/2025 |
+| M3 | Documentation fonctionnelle (`PlanTest.md`) validée | 15/11/2025 |
+| M4 | Plan de test complet (présent document) | 19/11/2025 |
+| M5 | Démarrage de la campagne de test | 20/11/2025 |
+| M6 | Consolidation des rapports finaux (`QA_FinalReports/`) | 29/11/2025 |
+
+### 2.2 JALONS CLÉS DU PROJET ET DU TEST
+| Jalons tests | Critère de réussite | Responsable |
+|--------------|---------------------|-------------|
+| T1 — Préparation environnement | Backend + frontend démarrables avec MongoDB seedée | Équipe DevOps |
+| T2 — Exécution tests fonctionnels | 100% des cas critiques PASS ou contournés | QA Lead |
+| T3 — Exigences NFR | Résultats performance/sécurité conformes | QA Perf/Sécu |
+| T4 — Revue finale | Aucun bug bloquant/majeur ouvert, rapport partagé | QA Manager |
+
+## 3. ÉLÉMENTS À TESTER
+Voir tableau détaillé dans `TestScope.md` (section 1) couvrant UI Angular, API Express, base MongoDB, flux d'authentification et calculs de classement.
+
+## 4. CARACTÉRISTIQUES À TESTER
+Les cinq caractéristiques prioritaires décrites dans `TestScope.md` §2 (Authentification, Parcours Quiz, Leaderboard, Gestion Catégories & Scores, NFR critiques) constituent la base des suites fonctionnelles.
+
+## 5. CARACTÉRISTIQUES À NE PAS TESTER
+Les fonctionnalités hors périmètre (social, multijoueur, quiz personnalisés, accessibilité AAA, apps mobiles natives) sont listées dans `TestScope.md` §3 et sont explicitement exclues de ce cycle.
+
+## 6. STRATÉGIE DE TEST
+La stratégie détaillée est reprise de `TestScope.md` §4 et est résumée ci-dessous pour complétude.
+
+### 6.1 CRITICITÉ DES CARACTÉRISTIQUES À TESTER
+Tableau de criticité (Authentification, Quiz, Leaderboard, Data, NFR) — voir `TestScope.md` §4.1.
+
+### 6.2 EFFORT DE TEST
+Répartition estimée (unitaires, intégration, E2E, non-fonctionnels) — voir `TestScope.md` §4.2.
+
+### 6.3 NIVEAUX DE TEST
+Unitaires, intégration API, système/E2E, acceptation utilisateur — `TestScope.md` §4.3.
+
+### 6.4 TECHNIQUES DE TEST
+Basées sur exigences, partitions, exploratoires, analyse de risque — `TestScope.md` §4.4.
+
+### 6.5 PRIORISATION DE L'EXÉCUTION DES TESTS
+Ordre proposé (auth → quiz → scores/leaderboard → NFR → compléments) — `TestScope.md` §4.5.
+
+### 6.6 AUTOMATISATION DES TESTS
+Cypress, Jest/Jasmine, SuperTest ciblant les flux critiques — `TestScope.md` §4.6.
+
+### 6.7 SUIVI ET CONTRÔLE DE L'AVANCEMENT DU TEST ET MÉTRIQUES
+Kanban QA, métriques (% exécuté, taux de réussite, densité défauts) — `TestScope.md` §4.7.
+
+### 6.8 GESTION DE CONFIGURATION
+Gestion des environnements, scripts seed, protection `.env` — `TestScope.md` §4.8.
+
+### 6.9 GESTION DES DÉFAUTS
+Workflow GitHub Issues (Open → Closed) avec priorisation par criticité — `TestScope.md` §4.9.
+
+### 6.10 OUTILS DE TEST UTILISÉS
+Sheets structurées pour cas de test, Cypress, Postman/Newman, Lighthouse/k6, OWASP ZAP — `TestScope.md` §4.10.
+
+### 6.11 GESTION DE LA QUALITÉ
+Revue croisée, Definition of Done QA, rétrospectives — `TestScope.md` §4.11.
+
+## 7. BESOINS EN ENVIRONNEMENTS
+| Environnement | Composants | Objectif |
+|---------------|------------|----------|
+| DEV local | Node 20.x, Angular CLI 18.2, MongoDB local, `.env` dev | Développement et tests unitaires |
+| TEST partagé | Backend déployé sur VM + MongoDB Atlas sandbox + build Angular prod | Campagne QA fonctionnelle/E2E |
+| PERF | Backend isolé avec monitoring (k6) | Scénarios NFR (perf & sécurité) |
+Des jeux de données seedés (`node addQuestions.js`) sont requis avant chaque campagne.
+
+## 8. BESOINS EN RESSOURCES ET FORMATION
+- **Ressources humaines** : 1 QA Lead, 1 QA Analyste, 1 QA Automation, 2 Dev support, 1 DevOps.
+- **Formation** : onboarding rapide à Angular Signals, API Express, utilisation de Sheets structurées et Cypress. Sessions de partage prévues (0.5 jour) pour aligner l'équipe QA sur les user stories.
+
+## 9. TÂCHES DE TEST ET RESPONSABILITÉS
+
+### 9.1 RÔLES ET RESPONSABILITÉS
+| Rôle | Responsabilités |
+|------|----------------|
+| QA Lead | Planification, suivi KPI, arbitrage des priorités. |
+| QA Analyste | Exécution manuelle, mise à jour Sheets, ouverture défauts. |
+| QA Automation | Scripts Cypress, intégration CI. |
+| Dev | Support correctifs et validations techniques. |
+| DevOps | Provision env, monitoring logs/tests. |
+
+### 9.2 PRÉPARATION DES TESTS
+- Valider la disponibilité des environnements.
+- Charger les jeux de données (questions, utilisateurs).
+- Importer `TestCasesSheet.csv` dans Sheets structurées et assigner les responsables.
+
+### 9.3 EXÉCUTION DES TESTS
+- Suivre l'ordre de priorité (§6.5).
+- Tenir à jour l'état (To Do/In Progress/Done) dans Sheets.
+- Informer le QA Lead des blocages (ex: MongoDB down) sous 2h.
+
+## 10. CRITÈRES D'ARRÊT ET CONDITIONS DE REPRISE DES TESTS
+- **Arrêt** : indisponibilité environnement >4h, taux d'échec bloquant >30%, build instable.
+- **Reprise** : correctifs déployés, données resynchronisées, validation QA Lead.
+
+## 11. LIVRABLES DU TEST
+- Plan courant (`MasterTestPlan.md`) et extrait exécutif `Plan_de_Test.md` dans `06_FinalReports/`.
+- Sheets de cas de test annotées.
+- Rapports d'exécution (journal quotidien + synthèse finale) et consolidation dans `Synthese_Resultats_Tests.md`.
+- Rapport défauts (GitHub Issues export).
+- Rapport performance/sécurité (captures Lighthouse/k6/ZAP) référencés dans les rapports finaux.
+
+## 12. RISQUES ET CONTINGENCES
+| Risque | Impact | Mitigation |
+|--------|--------|------------|
+| MongoDB indisponible | Blocage complet backend | Mise en place d'une instance Atlas de secours |
+| Données incohérentes | Faux positifs | Script de reseed avant chaque session |
+| Absence de JWT | Vulnérabilités session | Limiter portée du test, ouverture d'un ticket produit |
+| Manque de couverture tests auto | Régressions tardives | Prioriser scripts Cypress pour les flux critiques |
+
+## 13. CRITÈRES DE PASSAGE OU ÉCHEC
+- **Passage** : 100% des cas critiques PASS, aucun défaut bloquant/majeur ouvert, conformité NFR clés.
+- **Échec** : défaut bloquant non résolu, exigences NFR non atteintes, manque de couverture (>10% cas critiques non exécutés).
+
+## 14. INFORMATION COMPLÉMENTAIRE PROPRE AU CONTEXTE DU PROJET
+- Authentification basée sur localStorage (pas de token) : risque accepté pour ce MVP mais identifié pour itération suivante.
+- Frontend Angular utilise Signals : attention à la compatibilité tests (Cypress nécessite Angular >= v18).
+- Backend dépend d'une configuration `.env` simple (`MONGO_URI`, `PORT`), documentée dans `backend/.env`.
+
+## APPENDIX A — GLOSSAIRE
+| Terme | Définition |
+|-------|------------|
+| CTA | Call To Action (bouton) |
+| High score only | Logique conservant uniquement le meilleur score par catégorie |
+| Sheets structurées | Modèle de feuille de calcul utilisé par l'équipe QA pour suivre l'exécution |
+| LCP / TTI | Largest Contentful Paint / Time To Interactive (indicateurs Lighthouse) |
+| ZAP | OWASP Zed Attack Proxy pour tests de sécurité passifs |
+
+© Équipe QA Quiz Game — Page 1 of N (ajuster la pagination lors de l'export PDF)

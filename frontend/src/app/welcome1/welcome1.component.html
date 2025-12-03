@@ -1,0 +1,38 @@
+<section class="page-container">
+    <div class="bg-wrapper"></div>
+    <div class="logout-section">
+        <button type="logout-button" (click)="logout()">Logout</button>
+    </div>
+    
+    <div class="content-wrapper">
+        <div class="welcome-box">
+            <h2>Welcome, {{ username }}!</h2>
+            <div class="category-section">
+                <h3>Choose Your Quiz Category</h3>
+                <div class="category-grid">
+                    <div class="category-card" (click)="selectCategory('Computer Science')" [class.selected]="selectedCategory === 'Computer Science'">
+                        <span>Computer Science</span>
+                        <span class="icon"><ion-icon name="laptop-outline"></ion-icon></span>
+                    </div>
+                    <div class="category-card" (click)="selectCategory('Maths')" [class.selected]="selectedCategory === 'Maths'">
+                        <span>Maths</span>
+                        <span class="icon"><ion-icon name="calculator-outline"></ion-icon></span>
+                    </div>
+                    <div class="category-card" (click)="selectCategory('General Knowledge')" [class.selected]="selectedCategory === 'General Knowledge'">
+                        <span>General Knowledge</span>
+                        <ion-icon name="book-outline"></ion-icon>
+                    </div>
+                    <div class="category-card" (click)="selectCategory('Sports')" [class.selected]="selectedCategory === 'Sports'">
+                        <span>Sports</span>
+                        <ion-icon name="football-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+            <button type="button" (click)="startQuiz()" [disabled]="!selectedCategory">Start Quiz</button>
+        </div>
+
+        <div class="leaderboard-button-container">
+            <button type="button" class="leaderboard-button" (click)="goToLeaderboard()">Leaderboard⠀<ion-icon name="trophy-outline"></ion-icon></button>
+        </div>
+    </div>
+</section>

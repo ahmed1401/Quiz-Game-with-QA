@@ -1,0 +1,17 @@
+[
+  {
+    "_id": "user-1",
+    "username": "Alice",
+    "scores": [7, 6, 8, 5]
+  },
+  {
+    "_id": "user-2",
+    "username": "Bob",
+    "scores": [4, 5, 3, 2]
+  },
+  {
+    "_id": "user-3",
+    "username": "Charlie",
+    "scores": [2, 1, 3, 4]
+  }
+]

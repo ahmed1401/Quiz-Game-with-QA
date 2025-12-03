@@ -1,0 +1,59 @@
+# CATALOGUE DES CAS DE TEST — QUIZ GAME
+
+_Source: dérivé de `PlanTest.md` et `TestScope.md` (19/11/2025)_
+
+## 1. AUTHENTIFICATION (US-AUTH-001)
+
+| ID | Scénario | Préconditions | Étapes | Résultat attendu | Priorité |
+|----|----------|---------------|--------|------------------|----------|
+| TC-AUTH-001 | Inscription réussie | API disponible, aucun compte avec email/username donnés | 1. Ouvrir /register<br>2. Renseigner username unique, email valide, password et confirmation identiques<br>3. Soumettre le formulaire | HTTP 201, message succès, redirection vers /login, doc MongoDB contient utilisateur avec scores [0,0,0,0] et password hashé | Haute |
+| TC-AUTH-002 | Blocage doublon email/username | Utilisateur existant en base | 1. Soumettre formulaire avec email ou username existant<br>2. Observer réponse | HTTP 400 avec message "User with this email or username already exists", aucun nouvel enregistrement | Haute |
+| TC-AUTH-003 | Connexion réussie | Utilisateur existant et mot de passe connu | 1. Ouvrir /login<br>2. Entrer email/pwd valides<br>3. Soumettre | HTTP 200, réponse JSON sans password, localStorage contient `user` & `userId`, redirection /welcome | Haute |
+| TC-AUTH-004 | Connexion refusée | Utilisateur existant | 1. Entrer email valide + mauvais mot de passe<br>2. Soumettre | HTTP 401, message "Invalid email or password", aucun changement localStorage | Haute |
+| TC-AUTH-005 | Déconnexion | Utilisateur connecté | 1. Cliquer bouton Logout sur /welcome | localStorage vidé (`user`, `userId`, `quizCategory` absents), redirection /login | Haute |
+| TC-AUTH-006 | Protection routes | Utilisateur non connecté | 1. Naviguer directement vers /quiz ou /leaderboard | Redirection automatique /login, message d'accès refusé (console), URL protégée inaccessible | Haute |
+
+## 2. PARCOURS QUIZ (US-QUIZ-001)
+
+| ID | Scénario | Préconditions | Étapes | Résultat attendu | Priorité |
+|----|----------|---------------|--------|------------------|----------|
+| TC-QUIZ-001 | Sélection catégorie obligatoire | Utilisateur connecté, questions seedées | 1. Ouvrir /welcome<br>2. Ne sélectionner aucune carte<br>3. Vérifier bouton Start | Bouton Start désactivé tant qu'aucune carte n'est active | Haute |
+| TC-QUIZ-002 | Démarrage quiz | Utilisateur connecté, catégorie choisie | 1. Sélectionner "Computer Science"<br>2. Cliquer Start | Requête GET `/api/questions?category=Computer%20Science`, loader affiché, redirection /quiz avec index question=0 | Haute |
+| TC-QUIZ-003 | Mélange des réponses | Quiz en cours | 1. Observer ordre des réponses sur 3 questions consécutives | L'ordre diffère aléatoirement, réponse correcte toujours présente | Moyenne |
+| TC-QUIZ-004 | Navigation linéaire | Quiz en cours | 1. Sélectionner réponse question 1<br>2. Cliquer Next question<br>3. Tenter de revenir | L'index passe à 2, bouton Next masqué jusqu'à nouvelle sélection, aucune navigation arrière possible | Haute |
+| TC-QUIZ-005 | Calcul score | Quiz en cours | 1. Répondre 3 réponses correctes/5<br>2. Terminer quiz | Écran résultat affiche "3 out of 5 right", total correspond au rebond `correctAnswerCount` | Haute |
+| TC-QUIZ-006 | Sauvegarde du meilleur score | Compte existant, scores initiaux 2 | 1. Finir quiz avec score 4<br>2. Relancer même catégorie avec score 3 | Première sauvegarde PATCH `/score/:id` définit 4, deuxième sauvegarde conserve 4 (pas de baisse) | Haute |
+| TC-QUIZ-007 | Absence de questions | Base vide pour catégorie | 1. Lancer catégorie sans questions | Console affiche warning, `questions` signal vide, UI informe utilisateur (ex. message) | Moyenne |
+
+## 3. LEADERBOARD (US-LEAD-001)
+
+| ID | Scénario | Préconditions | Étapes | Résultat attendu | Priorité |
+|----|----------|---------------|--------|------------------|----------|
+| TC-LEAD-001 | Accès protégé | Aucun utilisateur connecté | 1. Naviguer vers /leaderboard | Redirection /login | Haute |
+| TC-LEAD-002 | Affichage classement | Au moins 3 utilisateurs avec scores variés | 1. Se connecter<br>2. Cliquer bouton Leaderboard | Tableau affiche colonnes complètes, tri décroissant sur total, rang calculé 1..n | Moyenne |
+| TC-LEAD-003 | Message liste vide | Base sans utilisateur | 1. Accéder leaderboard | Message "No users found" | Basse |
+| TC-LEAD-004 | Intégrité API | API disponible | 1. Interroger GET `/api/users/leaderboard` via Postman | Réponse 200 JSON `[{username, scores}]`, aucune donnée sensible | Haute |
+
+## 4. CATÉGORIES & SCORES (US-DATA-001)
+
+| ID | Scénario | Préconditions | Étapes | Résultat attendu | Priorité |
+|----|----------|---------------|--------|------------------|----------|
+| TC-DATA-001 | Validation enum catégorie | API question | 1. POST `/api/questions` avec category="History" | HTTP 400 + message enum invalide | Haute |
+| TC-DATA-002 | Mapping index catégorie | Utilisateur connecté | 1. Lancer quiz "Sports"<br>2. Capturer payload PATCH | `categoryIndex` = 3 conforme mapping, pas -1 | Haute |
+| TC-DATA-003 | Scores initialisés | Nouveau compte | 1. Créer utilisateur<br>2. GET `/api/users` | Tableau scores = [0,0,0,0] | Haute |
+| TC-DATA-004 | Rejet index invalide | API score | 1. PATCH `/score/:id` avec `categoryIndex: 5` | HTTP 400 message "Invalid category index" | Haute |
+| TC-DATA-005 | Calcul total côté client | Leaderboard chargé | 1. Vérifier `calculateTotalScore` sur utilisateur [1,2,3,4] | Résultat 10, affiché même valeur UI | Moyenne |
+
+## 5. EXIGENCES NON-FONCTIONNELLES PRIORITAIRES
+
+| ID | Scénario | Préconditions | Étapes | Résultat attendu | Priorité |
+|----|----------|---------------|--------|------------------|----------|
+| TC-NFR-001 | Performance chargement initial | Build prod déployé | 1. Mesurer via Lighthouse (réseau 4G simulé) | LCP < 3s, TTI < 3s | Moyenne |
+| TC-NFR-002 | Latence API | Serveur Node démarré, MongoDB up | 1. Exécuter 50 requêtes GET `/api/questions` (k6 ou Postman runner) | p95 < 500 ms | Moyenne |
+| TC-NFR-003 | Sécurité mot de passe | DB accessible | 1. Examiner collection `users` après inscription | Champ `password` contient hash bcrypt (commence par $2b$10) | Haute |
+| TC-NFR-004 | CORS restreint | Serveur Node config CORS | 1. Envoyer requête depuis origine non autorisée | Requête bloquée, réponse erreur CORS | Moyenne |
+| TC-NFR-005 | Gestion erreurs API | Serveur Node | 1. Forcer erreur DB (stop Mongo) puis appeler /api/users | Réponse JSON {message:'Something went wrong!'}, stack loggée côté serveur | Haute |
+| TC-NFR-006 | Accessibilité clavier (niveau AA) | Build dev | 1. Naviguer au clavier sur login/register<br>2. Vérifier focus visible | Tous éléments interactifs accessibles, labels associés | Moyenne |
+
+---
+**Remarque :** Chaque cas peut être enrichi avec des pas Given/When/Then détaillés dans l'outil de gestion de tests choisi (cf. section 4.10 de `TestScope.md`).
