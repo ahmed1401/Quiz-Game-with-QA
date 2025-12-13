@@ -11,6 +11,7 @@
     "cy:run": "cypress run --browser edge --env RUN_LIVE_E2E=false",
     "test:e2e": "concurrently --kill-others --success first \"npm run start:test\" \"npm run wait:and:run\"",
     "wait:and:run": "wait-on http://localhost:4300 && npm run cy:run",
+    "report:e2e": "junit-viewer --results=../QA_Bundle/05_Reports/automation-reports/cypress-results.xml --save=../QA_Bundle/05_Reports/automation-reports/cypress-report.html",
     "lh:audit:auth": "node scripts/run-lighthouse-puppeteer.js",
     "serve:ssr:quiz-game": "node dist/quiz-game/server/server.mjs"
   },
@@ -44,6 +45,7 @@
     "@types/node": "^18.18.0",
     "concurrently": "^9.2.1",
     "jasmine-core": "~5.2.0",
+    "junit-viewer": "^4.11.1",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",

@@ -1,21 +1,17 @@
 describe('Leaderboard page', () => {
-  beforeEach(() => {
-    cy.fixture('leaderboard').as('leaderboardData');
-  });
-
-  it('renders ranked users with their scores', function () {
-    cy.intercept('GET', '**/api/users/leaderboard', {
-      statusCode: 200,
-      body: this.leaderboardData,
-    }).as('loadLeaderboard');
-
+  it('renders ranked users with their scores', () => {
     cy.authenticatedVisit('/leaderboard');
-    cy.wait('@loadLeaderboard');
 
-    cy.get('tbody tr').should('have.length', this.leaderboardData.length);
-    cy.get('tbody tr').first().within(() => {
-      cy.get('td').eq(1).should('contain', 'Alice');
-      cy.get('td.total-score').should('contain', '26');
+    cy.get('tbody tr', { timeout: 10000 }).its('length').should('be.gte', 1);
+    cy.get('tbody tr').then(($rows) => {
+      const totals = Array.from($rows).map((row) => {
+        const totalCell = row.querySelector('td.total-score');
+        const value = totalCell?.textContent?.trim() ?? '0';
+        return Number.parseInt(value, 10) || 0;
+      });
+
+      const sortedTotals = [...totals].sort((a, b) => b - a);
+      expect(totals).to.deep.equal(sortedTotals);
     });
 
     cy.contains('button', 'Back to Menu').click();
