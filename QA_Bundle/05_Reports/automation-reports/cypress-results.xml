@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="3.593" tests="2" failures="0">
-  <testsuite name="Root Suite" timestamp="2025-12-11T21:05:22" tests="0" file="cypress\e2e\welcome.cy.ts" time="0.000" failures="0">
+<testsuites name="Mocha Tests" time="0.894" tests="2" failures="0">
+  <testsuite name="Root Suite" timestamp="2025-12-15T10:28:14" tests="0" file="cypress\e2e\welcome.cy.ts" time="0.000" failures="0">
   </testsuite>
-  <testsuite name="Welcome dashboard" timestamp="2025-12-11T21:05:22" tests="2" time="3.591" failures="0">
-    <testcase name="Welcome dashboard enforces category selection before starting the quiz" time="2.309" classname="enforces category selection before starting the quiz">
+  <testsuite name="Welcome dashboard" timestamp="2025-12-15T10:28:14" tests="2" time="0.893" failures="0">
+    <testcase name="Welcome dashboard enforces category selection before starting the quiz" time="0.574" classname="enforces category selection before starting the quiz">
     </testcase>
-    <testcase name="Welcome dashboard navigates to the leaderboard from the dashboard" time="1.058" classname="navigates to the leaderboard from the dashboard">
+    <testcase name="Welcome dashboard navigates to the leaderboard from the dashboard" time="0.260" classname="navigates to the leaderboard from the dashboard">
     </testcase>
   </testsuite>
 </testsuites>

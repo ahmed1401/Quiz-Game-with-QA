@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="backend-jest-suite" tests="13" failures="0" errors="0" time="6.995">
+  <testsuite name="User routes" errors="0" failures="0" skipped="0" timestamp="2025-12-15T10:24:26" time="5.813" tests="9">
+    <testcase classname="User routes POST /api/users/register creates a new user and strips the password field" name="User routes POST /api/users/register creates a new user and strips the password field" time="0.176">
+    </testcase>
+    <testcase classname="User routes POST /api/users/register rejects duplicate email or username" name="User routes POST /api/users/register rejects duplicate email or username" time="0.08">
+    </testcase>
+    <testcase classname="User routes POST /api/users/register validates required fields" name="User routes POST /api/users/register validates required fields" time="0.008">
+    </testcase>
+    <testcase classname="User routes POST /api/users/login authenticates with correct credentials" name="User routes POST /api/users/login authenticates with correct credentials" time="0.134">
+    </testcase>
+    <testcase classname="User routes POST /api/users/login rejects invalid credentials" name="User routes POST /api/users/login rejects invalid credentials" time="0.146">
+    </testcase>
+    <testcase classname="User routes GET /api/users returns the public fields only" name="User routes GET /api/users returns the public fields only" time="0.08">
+    </testcase>
+    <testcase classname="User routes PATCH /api/users/score/:userId updates the score only when the new value is higher" name="User routes PATCH /api/users/score/:userId updates the score only when the new value is higher" time="0.114">
+    </testcase>
+    <testcase classname="User routes PATCH /api/users/score/:userId validates category index bounds" name="User routes PATCH /api/users/score/:userId validates category index bounds" time="0.084">
+    </testcase>
+    <testcase classname="User routes GET /api/users/leaderboard returns all users with their scores" name="User routes GET /api/users/leaderboard returns all users with their scores" time="0.139">
+    </testcase>
+  </testsuite>
+  <testsuite name="Question routes" errors="0" failures="0" skipped="0" timestamp="2025-12-15T10:24:32" time="1.041" tests="4">
+    <testcase classname="Question routes POST /api/questions creates a question with all required fields" name="Question routes POST /api/questions creates a question with all required fields" time="0.073">
+    </testcase>
+    <testcase classname="Question routes POST /api/questions rejects payloads missing required values" name="Question routes POST /api/questions rejects payloads missing required values" time="0.009">
+    </testcase>
+    <testcase classname="Question routes GET /api/questions returns all questions when no filter supplied" name="Question routes GET /api/questions returns all questions when no filter supplied" time="0.015">
+    </testcase>
+    <testcase classname="Question routes GET /api/questions filters questions by category" name="Question routes GET /api/questions filters questions by category" time="0.017">
+    </testcase>
+  </testsuite>
+</testsuites>
